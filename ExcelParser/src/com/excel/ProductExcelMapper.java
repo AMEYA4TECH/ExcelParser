@@ -25,6 +25,7 @@ import com.a4.product.beans.Inventory;
 import com.a4.product.beans.Personalization;
 import com.a4.product.beans.Product;
 import com.a4.product.beans.ProductConfigurations;
+import com.a4.product.beans.ProductSkus;
 import com.a4.product.beans.RushTime;
 import com.a4.product.beans.SameDayRush;
 import com.a4.product.beans.Samples;
@@ -46,8 +47,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class ProductExcelMapper {
+	
+
+
 	public static void main(String[] args) throws IOException, EncryptedDocumentException, InvalidFormatException {
-		List<Product> BeanObj = readFileUsingPOI("D:\\A4 ESPUpdate\\Excel File\\v2\\productv2.xlsx");
+		List<Product> BeanObj = readFileUsingPOI("D:\\Excel Reader\\productv2.xlsx");
 		if(BeanObj==null){
 			// log error or write business logic
 			System.out.println("there was an error while prcessing this file");
@@ -105,6 +109,7 @@ public class ProductExcelMapper {
 			Inventory inventoryObj = new Inventory();
 	        Size sizeObj = new Size();
 			ShippingEstimate ShipingItem = new ShippingEstimate();
+		
 			
 			String shippingitemValue = null;
 			String shippingdimensionValue = null;
@@ -516,6 +521,8 @@ public class ProductExcelMapper {
 					productExcelObj.setPriceConfirmedThru(priceConfirmedThru);
 					//System.out.println(columnIndex + "priceConfirmedThru "+ priceConfirmedThru);
 					break;
+					
+			
 						
 				case 148:
 					String distributorViewOnly = cell.getStringCellValue();
@@ -545,7 +552,7 @@ public class ProductExcelMapper {
 			
 			ObjectMapper mapper = new ObjectMapper();
 			try {
-				File json = new File("D:\\A4 ESPUpdate\\Excel File\\v2\\player.json");
+				File json = new File("D:\\Excel Reader\\file.json");
 			mapper.writeValue(json, productExcelObj);
 			System.out.println("/////////////////////////////////////////");
 			System.out.println("Java object converted to JSON String, written to file");
